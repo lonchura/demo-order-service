@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package proto;
+
+// 订单商品详情
+message OrderItem {
+  int64 itemId = 1; //商品id
+  int32 quantity = 2; //商品数量
+}
+
+// 订单请求
+message OrderReq {
+  int32 time = 1; //下单时间
+  repeated OrderItem items = 2; //下单商品列表
+}
+
+// 订单响应
+message OrderResp {
+  int64 id = 1; //订单id
+}
+
+// 订单服务
+service OrderService {
+  // 下单服务
+  rpc Create(OrderReq) returns (OrderResp);
+}
