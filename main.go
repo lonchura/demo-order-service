@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/lonchura/demo-order-service/libs/wm"
 	"github.com/lonchura/demo-order-service/proto"
 	"github.com/lonchura/demo-order-service/service"
 	"google.golang.org/grpc"
@@ -9,6 +10,10 @@ import (
 )
 
 func main()  {
+	// WorkerManger start
+	workerManager := wm.NewWorkerManager()
+	workerManager.Start()
+
 	// grpc server
 	grpcServer := grpc.NewServer()
 
@@ -26,4 +31,7 @@ func main()  {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// wait worker stop
+	workerManager.Stop()
 }
